@@ -45,7 +45,7 @@ const Home = () => {
             setCardClass('cards-night')
             setColor('white')
 
-            document.getElementById("favicon").setAttribute("href", "src/assets/moon.png");
+            document.getElementById("favicon").setAttribute("href", "/moon.png");
         }
 
         // Fetching Weather Data
