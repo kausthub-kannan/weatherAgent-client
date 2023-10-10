@@ -1,0 +1,55 @@
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+.head-section{
+  text-align: center;
+  margin: 2%;
+  line-height: 10px;
+  padding: 1% 0 1% 0;
+}
+
+.logo{
+  width: 5%;
+}
+
+.forecast-icon{
+  width: 77%;
+}
+
+.cards{
+  text-align: center;
+  line-height: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.icon{
+  padding: 1%;
+  
+}
+
+.footer{
+  text-align: center;
+  margin-top: 7%;
+}
+
+.loading{
+  padding: 12%;
+}
+
+input{
+  padding: 2%;
+  border-radius: 7px;
+  border: 0;
+  width: 10%;
+  background-color: #ebebeb;
+}
+
+/* Night Theme */
+.cards-night{
+  background-color: #0b0814;
+  color: #ffffff;
+  text-align: center;
+  line-height: 15px;
+  box-shadow: 0 4px 8px 0 rgba(219, 219, 219, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+}
