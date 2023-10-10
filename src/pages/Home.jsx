@@ -15,12 +15,26 @@ const Home = () => {
     const [min, setMin] = useState(15)
     const [max, setMax] = useState(35)
 
+    const [tempStatus, setTempStatus] = useState("Lovely Weather!")
+
+    const alertTemp = () =>{
+        if(weather.current.temp_c < min){
+            console.log('low temp')
+            setTempStatus("Alert! Low Temperature")
+        }
+        else if(weather.current.temp_c > max){
+            setTempStatus("Alert! High Temperature")
+        }else{
+           setTempStatus("Lovely Weather!")
+        }
+    }
+
     useEffect(() => {
 
         console.log(min, max)
 
         const hours = new Date().getHours()
-        const dayTime = hours > 6 && hours < 20
+        const dayTime = hours > 6 && hours < 18
         setDayTime(dayTime)
 
         // Real time Night Mode
@@ -62,10 +76,11 @@ const Home = () => {
             {dayTime? <img className='logo' src={sun} alt="logo" />: <img className='logo' src={moon} alt="logo" />}
             <h1>ThermoGuardian</h1>
             <h5>Get Quick temperature alerts</h5>
-            <Button size="large" type="primary">Lovely Weather!</Button>
+            {tempStatus!="Lovely Weather!"? <Button size="large" danger type="primary">{tempStatus}</Button>: 
+            <Button size="large" type="primary">{tempStatus}</Button>}
         </div>
 
-        <Row justify="space-evenly">
+        <Row justify="space-evenly">    
 
             {/* Forecast Status Card */}
             <Col span={7}>
@@ -124,7 +139,7 @@ const Home = () => {
                             <input value={max} type="number" onChange={(e) => setMax(e.target.value)}/>
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" >Set</Button>
+                            <Button type="primary" htmlType="submit" onClick={() => alertTemp()} >Set</Button>
                         </Form.Item>
                     </Form>
                 </Card>
