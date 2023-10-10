@@ -14,6 +14,7 @@ const Home = () => {
 
     const [min, setMin] = useState(15)
     const [max, setMax] = useState(35)
+    const [location, setLocation] = useState('')
 
     const [tempStatus, setTempStatus] = useState("Lovely Weather!")
 
@@ -27,6 +28,25 @@ const Home = () => {
         }else{
            setTempStatus("Lovely Weather!")
         }
+    }
+
+    // Fetching Weather Data
+    const getWeather = async () => {
+        const ip_address = await axios.get("https://api.ipify.org/?format=json")
+        
+        const forecast_weather = await axios({
+            method: 'get',
+            url: 'https://api.weatherapi.com/v1/forecast.json',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            params: {
+                key: import.meta.env.VITE_API_KEY,
+                q: location || ip_address.data.ip,
+                days: 4
+            }
+        })
+        setWeather(forecast_weather.data)
     }
 
     useEffect(() => {
@@ -46,25 +66,6 @@ const Home = () => {
             setColor('white')
 
             document.getElementById("favicon").setAttribute("href", "/moon.png");
-        }
-
-        // Fetching Weather Data
-        const getWeather = async () => {
-            const ip_address = await axios.get("https://api.ipify.org/?format=json")
-
-            const forecast_weather = await axios({
-                method: 'get',
-                url: 'https://api.weatherapi.com/v1/forecast.json',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                params: {
-                    key: import.meta.env.VITE_API_KEY,
-                    q: ip_address.data.ip,
-                    days: 4
-                }
-            })
-            setWeather(forecast_weather.data)
         }
 
         getWeather()
@@ -116,6 +117,8 @@ const Home = () => {
                         {weather.location.country}, {weather.location.tz_id} <br />
                         Humidity: {weather.current.humidity}
                         </h5>
+                        <input value={location} style={{width: "20%"}} placeholder='Location' type='text' onChange={(e) => setLocation(e.target.value)}/>
+                        <Button size="medium" type="primary" style={{backgroundColor: "orange", color: "black"}} onClick={() => getWeather()}>Get Weather</Button>
                     </>
                     ) : (
                         <Row justify="center">
