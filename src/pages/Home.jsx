@@ -78,7 +78,7 @@ const Home = () => {
             <h1>ThermoGuardian</h1>
             <h5>Get Quick temperature alerts</h5>
             {tempStatus!="Lovely Weather!"? <Button size="large" danger type="primary">{tempStatus}</Button>: 
-            <Button size="large" type="primary">{tempStatus}</Button>}
+            <Button style={{backgroundColor: "green"}} size="large" type="primary">{tempStatus}</Button>}
         </div>
 
         <Row justify="space-evenly">    
